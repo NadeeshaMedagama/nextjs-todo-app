@@ -21,23 +21,23 @@ configurations:
           required: true
           type: string
 
-    - name: NEXT_PUBLIC_APP_URL
-      valueFrom:
-        configForm:
-          displayName: Application URL
-          required: false
-          type: string
-
-    - name: DATABASE_URL
-      valueFrom:
-        configForm:
-          displayName: Database Connection String
-          required: false
-          type: secret
-
     - name: PORT
       valueFrom:
         configForm:
           displayName: Server Port
           required: true
           type: number
+
+    - name: HOSTNAME
+      valueFrom:
+        configForm:
+          displayName: Hostname
+          required: false
+          type: string
+
+    - name: NEXT_PUBLIC_APP_URL
+      valueFrom:
+        configForm:
+          displayName: Application URL
+          required: false
+          type: string
