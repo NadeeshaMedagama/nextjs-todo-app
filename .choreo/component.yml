@@ -5,7 +5,7 @@ endpoints:
     displayName: Todo App API
     service:
       basePath: /
-      port: 3000
+      port: 8080
     type: REST
     networkVisibilities:
       - Public
