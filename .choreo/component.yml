@@ -1,53 +1,43 @@
 schemaVersion: 1.2
 
 endpoints:
-  - name: todo-api
+  - name: todo-app-api
     displayName: Todo App API
     service:
-      basePath: /api
+      basePath: /
       port: 3000
     type: REST
-    networkVisibilities: 
+    networkVisibilities:
       - Public
       - Organization
-    schemaFilePath: openapi.yaml
-
-dependencies:
-  connectionReferences:
-    - name: database-connection
-      resourceRef: service:/DatabaseProject/PostgreSQLComponent/v1/ad088/PUBLIC
+    schemaFilePath: .choreo/openapi.yml
 
 configurations:
   env:
-    - name: DATABASE_URL
-      valueFrom:
-        connectionRef:
-          name: database-connection
-          key: ConnectionString
     - name: NODE_ENV
       valueFrom:
         configForm:
-            displayName: Node Environment
-            required: true
-            type: string
+          displayName: Node Environment
+          required: true
+          type: string
+
     - name: NEXT_PUBLIC_APP_URL
       valueFrom:
         configForm:
-            displayName: Application URL
-            required: false
-            type: string
-  file:
-    - name: next.config.js
-      mountPath: /app
-      type: yaml
-      values:
-        - name: output
-          valueFrom:
-            configForm:
-              displayName: Build Output Type
-              type: string
-        - name: trailingSlash
-          valueFrom:
-            configForm:
-              displayName: Enable Trailing Slash
-              type: boolean
+          displayName: Application URL
+          required: false
+          type: string
+
+    - name: DATABASE_URL
+      valueFrom:
+        configForm:
+          displayName: Database Connection String
+          required: false
+          type: secret
+
+    - name: PORT
+      valueFrom:
+        configForm:
+          displayName: Server Port
+          required: true
+          type: number
